@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+.env
+.venv
+venv/
+
+# dbt
+target/
+logs/
+dbt_packages/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Docker
+*.log
+
+# Temporary files
+*.tmp
+*.bak

@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: retail_postgres
+    environment:
+      POSTGRES_USER: dbt_user
+      POSTGRES_PASSWORD: dbt_password
+      POSTGRES_DB: retail_dw
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  dbt:
+    build: .
+    container_name: retail_dbt
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/app
+    working_dir: /usr/app
+    depends_on:
+      - postgres
+    entrypoint: /usr/app/init_dbt.sh
+    environment:
+      PYTHONUNBUFFERED: 1
+
+volumes:
+  postgres_data:
